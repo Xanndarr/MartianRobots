@@ -4,6 +4,7 @@ Robot:
 		int y
 		enum orientation {N, S, E, W}
 	bool lost?
+	Grid grid 	<== the grid this robot belongs to
 
 Instruction:
 	 string instruction

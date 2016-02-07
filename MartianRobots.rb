@@ -49,7 +49,7 @@ puts "OUTPUT: "
 output_file = "simulation.out"
 File.open(output_file, "w") do |file|
 	robots.each do |r|
-		puts "Robot ended at (#{r.x}, #{r.y}) facing #{r.orient} #{r.lost?}"
+		puts "Robot ended at (#{r.x}, #{r.y}) facing #{r.orient} #{" LOST" if r.lost?}"
 		file.write("#{r.x} #{r.y} #{r.orient}#{" LOST" if r.lost?}\n")
 	end
 end

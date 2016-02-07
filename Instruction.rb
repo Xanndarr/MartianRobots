@@ -1,5 +1,3 @@
-require_relative "Robot.rb"
-
 class Instruction
 
 	def initialize(instr)

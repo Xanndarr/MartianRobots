@@ -1,5 +1,3 @@
-require_relative "Grib.rb"
-
 class Robot
 
 	attr_reader :x, :y, :orient
@@ -60,14 +58,13 @@ class Robot
 		end
 
 		if @grid.oob?(new_x, new_y)
-			if @grid.scented?(new_x, new_y)
-				return
-			else
+			if !@grid.scented?(new_x, new_y)
 				@grid.mark_scent(new_x, new_y)
 				@lost = true
 			end
+			return
 		end
-		
+
 		@x = new_x
 		@y = new_y
 	end

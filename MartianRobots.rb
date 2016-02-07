@@ -18,6 +18,7 @@ if !File.exists?(input_file)
 	exit
 end
 
+puts "INPUT: "
 #Parse and make sense of our input.
 lines = File.readlines input_file						#parse lines from file
 lines.map! { |line| line.chomp.strip }					#clean input
@@ -32,13 +33,28 @@ puts "New grid created with dimensions [#{grid_dims[0]}, #{grid_dims[1]}]"
 robots = Array.new
 lines[1..lines.size].each_slice(2) do |state, instr|
 	state = state.split
-	x = state[0]
-	y = state[1]
+	x = state[0].to_i
+	y = state[1].to_i
 	orient = state[2].to_sym
 
-	robots << Robot.new(x, y, orient, grid)
+	r = Robot.new(x, y, orient, grid)
+	robots << r
 	puts "New robot created at (#{x}, #{y}) facing #{orient}"
+
+	puts instr if DEBUG
+	Instruction.new(instr).run(r)
 end
+
+puts "OUTPUT: "
+output_file = "simulation.out"
+File.open(output_file, "w") do |file|
+	robots.each do |r|
+		puts "Robot ended at (#{r.x}, #{r.y}) facing #{r.orient} #{r.lost?}"
+		file.write("#{r.x} #{r.y} #{r.orient}#{" LOST" if r.lost?}\n")
+	end
+end
+
+puts "Sample output can be found in #{output_file}"
 
 #DEBUG info:
 p lines if DEBUG

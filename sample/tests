@@ -1,0 +1,12 @@
+#!/usr/bin/ruby
+require "fileutils"
+
+in_dir = "./in/"
+out_dir = "./out/"
+
+Dir.foreach(in_dir) do | item |
+	next if item == "." or item == ".."
+	output = `ruby ../MartianRobots.rb #{in_dir + item}`
+	success = FileUtils.identical?("../simulation.out", out_dir + item.gsub(".in", ".out"))
+	puts "#{success ? "\e[31mFAIL\e[0m" : "\e[32mPASS\e[0m"}\t#{item}\n"
+end

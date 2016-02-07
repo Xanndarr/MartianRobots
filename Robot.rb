@@ -47,8 +47,8 @@ class Robot
 		end
 
 		if @grid.oob?(new_x, new_y)
-			if !@grid.scented?(new_x, new_y)
-				@grid.mark_scent(new_x, new_y)
+			if !@grid.scented?(@x, @y)
+				@grid.mark_scent(@x, @y)
 				@lost = true
 			end
 			return

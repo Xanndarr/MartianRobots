@@ -14,7 +14,7 @@ class Robot
 		@lost
 	end
 
-	def left
+	def L
 		case @orient
 		when :N
 			@orient = :W
@@ -27,7 +27,7 @@ class Robot
 		end
 	end
 
-	def right
+	def R
 		case @orient
 		when :N
 			@orient = :E
@@ -40,7 +40,7 @@ class Robot
 		end
 	end
 
-	def forward
+	def F
 		return if @lost
 
 		new_x = @x

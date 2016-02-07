@@ -7,14 +7,7 @@ class Instruction
 	def run(robot)
 		commands = @instr.split("").map { |i| i.to_sym }
 		commands.each do |i|
-			case i
-			when :L
-				robot.left
-			when :R
-				robot.right
-			when :F
-				robot.forward
-			end
+			robot.method(i).call
 		end
 	end
 

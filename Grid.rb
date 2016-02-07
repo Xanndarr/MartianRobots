@@ -14,4 +14,8 @@ class Grid
 		@scented[[x, y]]
 	end
 
+	def oob?(x, y)
+		return x >= 0 && x <= @x_bound && y >= 0 && y <= @y_bound
+	end
+
 end

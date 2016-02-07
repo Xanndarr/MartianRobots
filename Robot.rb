@@ -1,6 +1,8 @@
+require_relative "Grib.rb"
+
 class Robot
 
-	attr_reader :x, :y, :orent
+	attr_reader :x, :y, :orient
 
 	def initialize(x, y, orient, grid)
 		@x = x
@@ -41,17 +43,33 @@ class Robot
 	end
 
 	def forward
+		return if @lost
+
+		new_x = @x
+		new_y = @y
+
 		case @orient
 		when :N
-			y += 1
+			new_y += 1
 		when :E
-			x += 1
+			new_x += 1
 		when :S
-			y -= 1
+			new_y -= 1
 		when :W
-			x -= 1
+			new_x -= 1
 		end
-		#TODO: Add oob checks and scenting
+
+		if @grid.oob?(new_x, new_y)
+			if @grid.scented?(new_x, new_y)
+				return
+			else
+				@grid.mark_scent(new_x, new_y)
+				@lost = true
+			end
+		end
+		
+		@x = new_x
+		@y = new_y
 	end
 
 end

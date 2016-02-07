@@ -1,5 +1,7 @@
 class Robot
 
+	@@orientations = [:N, :E, :S, :W]
+
 	attr_reader :x, :y, :orient
 
 	def initialize(x, y, orient, grid)
@@ -15,29 +17,16 @@ class Robot
 	end
 
 	def L
-		case @orient
-		when :N
-			@orient = :W
-		when :E
-			@orient = :N
-		when :S
-			@orient = :E
-		when :W
-			@orient = :S
-		end
+		index = @@orientations.index(@orient)
+		@orient = @@orientations[index - 1]
 	end
 
+	#We can access arrays using negative indices, but not positive ones.
+	#We have to make sure we're accessing the correct elements.
 	def R
-		case @orient
-		when :N
-			@orient = :E
-		when :E
-			@orient = :S
-		when :S
-			@orient = :W
-		when :W
-			@orient = :N
-		end
+		index = @@orientations.index(@orient)
+		index = (index + 1) % @@orientations.size
+		@orient = @@orientations[index]
 	end
 
 	def F

@@ -1,5 +1,6 @@
 require_relative "Grid.rb"
 require_relative "Robot.rb"
+require_relative "Instruction.rb"
 
 puts "=== Welcome to the martian robot simulator! ==="
 puts "===             by Tom Barwick              ==="

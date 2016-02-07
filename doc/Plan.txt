@@ -1,0 +1,36 @@
+Robot:
+	Position:
+		int x
+		int y
+		enum orientation {N, S, E, W}
+	bool lost?
+
+Instruction:
+	 string instruction
+	 {L, R, F}	<== Possibly requires expansion in future.
+
+Grid:			<== 0,0 is lower left. x,y is upper right.
+	int height
+	int width
+	hash pos => scent(bool)		<== should default to false
+
+Main:
+	Input:
+		1. upper-right co-ords of grid.
+		2. Robot position + instr ...
+			Line 1: Robot Position. e.g. 2 4 N		<== max 50, 50
+			Line 2: Instructions. e.g RLRRFFRLR		<== max.length 100
+
+
+
+Control Flow:
+
+	Main. Take input.
+	Create Grid.
+	Create Robots.
+	Add Robots to Grid.
+	For each robot
+		run instructions on robot.
+	end.
+	Ask each robot for its position and state.
+	Generate output for robots.
